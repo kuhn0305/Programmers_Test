@@ -39,7 +39,7 @@ class NumericStringsAndEnglishWords
 
         string input = s;
 
-        char[] sChar = s;
+        char[] sChar = s.ToCharArray();
 
         foreach(string key in wordsNumPairs.Keys)
         {
