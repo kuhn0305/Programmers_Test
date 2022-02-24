@@ -7,5 +7,10 @@ class Program
     {
         // Call the SolveQuestion function of the problem(Class) you want.
         // Ex) InnerProduct.SolveQuestion();
+
+        int[] testCase =
+        {
+
+        };
     }
 }
