@@ -1,4 +1,4 @@
-﻿#define 다리를지나는트럭
+﻿#define 주식가격
 
 using System;
 using System.Collections.Generic;
@@ -120,6 +120,47 @@ namespace ProgrammersTest
             return answer;
         }
 
+#endif
+
+#if 주식가격
+        public static int[] solution(int[] prices)
+        {
+            int[] answer = new int[prices.Length];
+
+            for(int index = 0; index < prices.Length; index++)
+            {
+                if(index == prices.Length - 1)
+                {
+                    answer[index] = 0;
+                }
+                else
+                {
+                    Console.WriteLine("@@@@");
+
+                    int value = 0;
+
+                    for(int j = index + 1; j < prices.Length; j++)
+                    {
+                        Console.WriteLine("Inner Loop");
+                        value++;
+
+                        if(prices[index] > prices[j])
+                        {
+                            Console.WriteLine($"{prices[index]} :: {prices[j]}");
+
+                            break;
+                        }
+                    }
+
+                    answer[index] = value;
+                }
+            }
+
+            foreach(int value in answer)
+                Console.WriteLine(value);
+
+            return answer;
+        }
 #endif
 
     }
