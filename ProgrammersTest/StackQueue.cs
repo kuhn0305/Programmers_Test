@@ -10,8 +10,6 @@ namespace ProgrammersTest
 {
     class StackQueue
     {
-
-
 #if 프린터
         struct Item
         {
@@ -135,21 +133,14 @@ namespace ProgrammersTest
                 }
                 else
                 {
-                    Console.WriteLine("@@@@");
-
                     int value = 0;
 
                     for(int j = index + 1; j < prices.Length; j++)
                     {
-                        Console.WriteLine("Inner Loop");
                         value++;
 
                         if(prices[index] > prices[j])
-                        {
-                            Console.WriteLine($"{prices[index]} :: {prices[j]}");
-
                             break;
-                        }
                     }
 
                     answer[index] = value;
