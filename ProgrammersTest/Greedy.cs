@@ -1,4 +1,4 @@
-﻿#define 조이스틱
+﻿#define 큰수만들기
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,6 @@ namespace ProgrammersTest
     class Greedy
     {
 #if 조이스틱
-
         public static int solution(string name)
         {
             int answer = 0;
@@ -49,7 +48,57 @@ namespace ProgrammersTest
 
             return answer;
         }
+#endif
 
+#if 큰수만들기
+        public static string solution(string number, int k)
+        {
+            string answer = "";
+
+            int stringLength = number.Length;
+            int length = stringLength - k;
+            int checkLength = length;
+            int searchStart = 0;
+
+            char[] numArr = number.ToCharArray();
+            List<char> answerList = new List<char>();
+
+            for(int seq = 0; seq < length; seq++)
+            {
+                char max = '-';
+                int maxIndex = 0;
+
+                Console.WriteLine($"{searchStart} :: {stringLength - checkLength + 1}");
+
+                for(int index = searchStart;  index < stringLength - checkLength + 1; index++)
+                {
+                    if(numArr[index] > max)
+                    {
+                        maxIndex = index;
+
+                        max = numArr[index];
+                    }
+                }
+
+                searchStart = maxIndex + 1;
+                checkLength--;
+
+                if(max != '-')
+                    answerList.Add(max);
+
+                Console.WriteLine(max);
+            }
+
+            Console.WriteLine($"과연 길이는? {answerList.Count}");
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(answerList.ToArray());
+            answer = stringBuilder.ToString();
+
+            Console.WriteLine(answer);
+
+            return answer;
+        }
 #endif
     }
 }
