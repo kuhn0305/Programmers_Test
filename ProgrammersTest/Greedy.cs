@@ -1,4 +1,4 @@
-﻿#define 큰수만들기
+﻿#define 섬연결하기
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -95,6 +95,119 @@ namespace ProgrammersTest
             stringBuilder.Append(answerList.ToArray());
             answer = stringBuilder.ToString();
 
+            Console.WriteLine(answer);
+
+            return answer;
+        }
+#endif
+
+#if 섬연결하기
+
+        class Point
+        {
+            public int start;
+            public int dst;
+            public int value;
+
+            public bool isUesd;
+
+            public Point(int s, int d, int v)
+            {
+                start = s;
+                dst = d;
+                value = v;
+
+                isUesd = false;
+            }
+        }
+
+        static int GetPartent(int[] set, int x)
+        {
+            if(set[x] == x)
+                return x;
+            else
+                return set[x] = GetPartent(set, set[x]);
+        }
+
+        static void UnionParent(int[] set, int a, int b)
+        {
+            a = GetPartent(set, a);
+            b = GetPartent(set, b);
+
+            if(a < b)
+                set[b] = a;
+            else
+                set[a] = b;
+        }
+
+        static bool Find(int[] set, int a, int b)
+        {
+            a = GetPartent(set, a);
+            b = GetPartent(set, b);
+
+            if(a == b)
+                return true;
+            else
+                return false;
+        }
+
+        public static int solution(int n, int[,] costs)
+        {
+            int answer = 0;
+
+            List<Point> points = new List<Point>();
+
+            int[] cycleTable = new int[n];
+
+            for(int index = 0; index < n; index++)
+            {
+                cycleTable[index] = index;
+            }
+
+
+            for(int i = 0; i < costs.Length / 3; i++)
+            {
+                int start = 0, dst = 0, value = 0;
+
+                for(int j = 0; j < 3; j++)
+                {
+                    switch(j)
+                    {
+                        case 0:
+                            start = costs[i, j];
+                            break;
+
+                        case 1:
+                            dst = costs[i, j];
+                            break;
+
+                        case 2:
+                            value = costs[i, j];
+                            break;
+                    }
+                }
+
+                points.Add(new Point(start, dst, value));
+            }
+
+            points.Sort((x, y) => x.value.CompareTo(y.value));
+
+            foreach(Point point in points)
+            {
+                if(!Find(cycleTable, point.start, point.dst))
+                {
+                    answer += point.value;
+
+                    UnionParent(cycleTable, point.start, point.dst);
+                }
+
+                foreach(int num in cycleTable)
+                    Console.Write($"{num}  ");
+                Console.WriteLine();
+
+            }
+
+            Console.WriteLine();
             Console.WriteLine(answer);
 
             return answer;
