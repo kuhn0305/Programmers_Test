@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace BaekJoon
             short N = short.Parse(inputString[0]);
             short M = short.Parse(inputString[1]);
             short S = short.Parse(inputString[2]);
-            S--;
+            S -= 1;
 
             int[,] adj = new int[N, N];
 
@@ -32,20 +33,12 @@ namespace BaekJoon
             }
 
             // DFS 구현
-
-            List<int> dfsList = new List<int>();
+            List<int> answerList = new List<int>();
 
             bool[] visited = new bool[N];
             Stack<int> stack = new Stack<int>();
 
-            visited[S] = true;
-            dfsList.Add(S + 1);
-
-            for(int x = N - 1; x >= 0; x--)
-            {
-                if (adj[S, x] == 1)
-                    stack.Push(x);
-            }
+            stack.Push(S);
 
             while(stack.Count > 0)
             {
@@ -55,7 +48,7 @@ namespace BaekJoon
                     continue;
 
                 visited[now] = true;
-                dfsList.Add(now + 1);
+                answerList.Add(now + 1);
 
                 for (int inner = N - 1; inner >= 0; inner--)
                 {
@@ -67,9 +60,41 @@ namespace BaekJoon
                 }
             }
 
-            foreach (int a in dfsList)
-                Console.Write(a + " ");
+            foreach (int a in answerList)
+                Console.Write($"{a} ");
 
+            Console.WriteLine();
+
+            // BFS 구현
+            answerList.Clear();
+
+            visited = new bool[N];
+            Queue<int> queue = new Queue<int>();
+
+            queue.Enqueue(S);
+
+            while(queue.Count > 0)
+            {
+                int now = queue.Dequeue();
+
+                if (visited[now])
+                    continue;
+
+                visited[now] = true;
+                answerList.Add(now + 1);
+
+                for(int inner = 0; inner < N; inner++)
+                {
+                    if (visited[inner])
+                        continue;
+
+                    if (adj[now,inner] == 1)
+                        queue.Enqueue(inner);
+                }
+            }
+
+            foreach (int a in answerList)
+                Console.Write($"{a} ");
         }
     }
 
