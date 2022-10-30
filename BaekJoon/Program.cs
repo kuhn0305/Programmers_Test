@@ -6,7 +6,8 @@ namespace BaekJoon
     {
         static void Main(string[] args)
         {
-            _2178.Solution();
+            _24479 _24479 = new _24479();
+            _24479.Solution();
         }
     }
 }
