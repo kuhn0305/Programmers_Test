@@ -1,4 +1,4 @@
-﻿#define 여행경로
+﻿#define 아이템줍기
 
 using System;
 using System.Collections.Generic;
@@ -288,6 +288,34 @@ namespace ProgrammersTest
                     }
                 }
             }
+        }
+#endif
+
+#if 아이템줍기
+        public int solution(int[,] rectangle, int characterX, int characterY, int itemX, int itemY)
+        {
+            int answer = 0;
+
+            int[,] adj = new int[50, 50];
+
+            int leftX = 0;
+            int leftY = 0;
+            int rightX = 0;
+            int rightY = 0;
+
+            int[] rectPos = new int[] {  };
+
+            for (int rect = 0; rect < rectangle.GetLength(0); rect++)
+            {
+                for (int recInfo = 0; recInfo < 4; recInfo++)
+                {
+                    leftX = rectangle[rect, recInfo];
+                }
+            }
+
+
+
+            return answer;
         }
 #endif
     }
